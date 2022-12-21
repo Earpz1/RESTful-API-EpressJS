@@ -22,11 +22,11 @@ authorsRouter.get('/', (request, response) => {
 
 authorsRouter.post('/', (request, response) => {
   const newAuthor = { ...request.body, ID: uniqid() } //Get the body of what was sent in the response
-  const fileData = JSON.parse(fs.readFileSync(authorsJSONFile)) //Read the data from the authors file
+  const authors = JSON.parse(fs.readFileSync(authorsJSONFile)) //Read the data from the authors file
 
-  fileData.push(newAuthor) //Push the body into the array
-  fs.writeFileSync(authorsJSONFile, JSON.stringify(fileData)) //Stringify the array before writing it back to the file, overwriting everything
-  response.status(201).send({ name: newAuthor.name })
+  authors.push(newAuthor) //Push the body into the array
+  fs.writeFileSync(authorsJSONFile, JSON.stringify(authors)) //Stringify the array before writing it back to the file, overwriting everything
+  response.status(201).send({ newAuthor })
 })
 
 //This endpoint is for DELETING a specific user by ID
