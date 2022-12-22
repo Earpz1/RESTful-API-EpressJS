@@ -3,48 +3,45 @@ import fs from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import uniqid from 'uniqid'
-
-const authorsJSONFile = join(
-  dirname(fileURLToPath(import.meta.url)),
-  'authors.json',
-) //This gets the directory of the current file and then finds the file name within that directory
+import multer from 'multer'
+import { getAuthors, writeAuthor, saveAvatarPhoto } from '../../lib/fs-funcs.js'
 
 const authorsRouter = express.Router()
 
 //This endpoint is for GETTING all the authors from the JSON file
 
-authorsRouter.get('/', (request, response) => {
-  const fileData = JSON.parse(fs.readFileSync(authorsJSONFile))
+authorsRouter.get('/', async (request, response) => {
+  const fileData = await getAuthors()
   response.send(fileData)
 })
 
 // This endpoint is for POSTING new data to the JSON file
 
-authorsRouter.post('/', (request, response) => {
-  const newAuthor = { ...request.body, ID: uniqid() } //Get the body of what was sent in the response
-  const authors = JSON.parse(fs.readFileSync(authorsJSONFile)) //Read the data from the authors file
+authorsRouter.post('/', async (request, response) => {
+  const authors = await getAuthors()
+  const newAuthor = { ...request.body, ID: uniqid() }
 
-  authors.push(newAuthor) //Push the body into the array
-  fs.writeFileSync(authorsJSONFile, JSON.stringify(authors)) //Stringify the array before writing it back to the file, overwriting everything
+  authors.push(newAuthor)
+  await writeAuthor(authors)
   response.status(201).send({ newAuthor })
 })
 
 //This endpoint is for DELETING a specific user by ID
-authorsRouter.delete('/:id', (request, response) => {
-  const fileData = JSON.parse(fs.readFileSync(authorsJSONFile)) //Read the data from the authors file
+authorsRouter.delete('/:id', async (request, response) => {
+  const fileData = await getAuthors()
 
   const id = request.params.id // Get the ID from the request
 
   const filterData = fileData.filter((authors) => authors.ID !== id) //Filter the array, removing the object with the ID from the request
 
-  fs.writeFileSync(authorsJSONFile, JSON.stringify(filterData)) //Stringify the data and overwrite the file
+  await writeAuthor(filterData)
 
   response.status(204).send() //Send 204 response back
 })
 
 //This endpoint is for GETTING a user by ID
-authorsRouter.get('/:id', (request, response) => {
-  const fileData = JSON.parse(fs.readFileSync(authorsJSONFile)) //Get the data from the JSON file
+authorsRouter.get('/:id', async (request, response) => {
+  const fileData = await getAuthors()
   const id = request.params.id // Get the ID from the request
 
   const singleAuthor = fileData.find((author) => author.ID === id) //Find the object with the ID passed in the request
@@ -53,8 +50,8 @@ authorsRouter.get('/:id', (request, response) => {
 })
 
 //This endpoint is for editing a user with a specific ID using PUT
-authorsRouter.put('/:id', (request, response) => {
-  const fileData = JSON.parse(fs.readFileSync(authorsJSONFile)) //Read the data from the authors file
+authorsRouter.put('/:id', async (request, response) => {
+  const fileData = await getAuthors()
   const id = request.params.id // Get the ID from the request
 
   const index = fileData.findIndex((author) => author.ID === id) //Find the index of the array with the ID
@@ -64,13 +61,13 @@ authorsRouter.put('/:id', (request, response) => {
 
   fileData[index] = updatedAuthor //Overwrite the index of the array with the updated object
 
-  fs.writeFileSync(authorsJSONFile, JSON.stringify(fileData)) //Stringfy the data and overwrite the authors file
+  await writeAuthor(fileData)
 
   response.send(updatedAuthor) //Send back the updated object as a response
 })
 
-authorsRouter.post('/:checkEmail', (request, response) => {
-  const fileData = JSON.parse(fs.readFileSync(authorsJSONFile)) //Read the data from the file
+authorsRouter.post('/:checkEmail', async (request, response) => {
+  const fileData = await getAuthors()
   const email = request.params.checkEmail
   const newAuthor = request.body
 
@@ -78,11 +75,43 @@ authorsRouter.post('/:checkEmail', (request, response) => {
 
   if (filterData.length === 0) {
     fileData.push(newAuthor)
-    fs.writeFileSync(authorsJSONFile, JSON.stringify(fileData))
+    await writeAuthor(fileData)
     response.status(201).send(newAuthor)
   } else {
     response.status(400).send('Unable to edit user: Email already exists')
   }
 })
+
+authorsRouter.post(
+  '/:id/uploadAvatar',
+  multer().single('avatar'),
+  async (request, response, next) => {
+    try {
+      console.log(request.file.buffer)
+      const fileName = request.params.id + '.gif'
+      await saveAvatarPhoto(fileName, request.file.buffer)
+
+      const url = 'http://localhost:3001/img/avatars/' + fileName
+
+      const authors = await getAuthors()
+
+      const authorIndex = authors.findIndex(
+        (author) => author.ID === request.params.id,
+      )
+
+      if (authorIndex !== -1) {
+        const author = authors[authorIndex]
+        const newAuthor = { ...author, avatar: url }
+
+        authors[authorIndex] = newAuthor
+        await writeAuthor(authors)
+      }
+
+      response.send('Avatar uploaded!')
+    } catch (error) {
+      next()
+    }
+  },
+)
 
 export default authorsRouter
