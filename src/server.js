@@ -15,7 +15,7 @@ const logger = (request, response, next) => {
   next()
 }
 
-const whitelist = [process.env.FE_PROD_URL]
+const whitelist = ['https://strive-blog-l4cpa2mro-earpz1.vercel.app']
 
 server.get('/', (request, response) => {
   response.send('Successful connection')
@@ -28,7 +28,10 @@ server.use(
   cors({
     origin: (origin, corsNext) => {
       console.log('Origin: ', origin)
+      if (!origin || whitelist.indexOf(origin) !== -1) {
         corsNext(null, true)
+      } else {
+        corsNext(createHttpError(400, `Cors Errors!`))
       }
     },
   }),
