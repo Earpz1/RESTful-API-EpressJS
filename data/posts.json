@@ -1,1 +1,41 @@
-[{"category":"Category2","title":"Elf is the best christmas film ever!","cover":"http://localhost:3001/img/blog_covers/igt8g8glbz7odqj.gif","readTime":{"value":2,"unit":"minute"},"author":{"name":"Daniel Earp","avatar":"https://ui-avatars.com/api/?name=Daniel+Earp"},"content":"<p>3 days until Xmas!!!</p>","createdAt":"Thu Dec 22 2022","_id":"igt8g8glbz7odqj"},{"category":"Category2","title":"It's 3 days until Christmas!","cover":"http://localhost:3001/img/blog_covers/igt8g8glbz9b1ux.gif","readTime":{"value":2,"unit":"minute"},"author":{"name":"Daniel Earp","avatar":"https://ui-avatars.com/api/?name=Daniel+Earp"},"content":"<p>dgjhnjknfdkjgnfdkjgfdghghfnhfgh</p>","createdAt":"Thu Dec 22 2022","_id":"igt8g8glbz9b1ux"}]
+[
+  {
+    "category": "Category2",
+    "title": "Best places to visit in the world!",
+    "cover": "http://localhost:3001/img/blog_covers/igt8g8glbz9w9rr.gif",
+    "readTime": { "value": 2, "unit": "minute" },
+    "author": {
+      "name": "Daniel Earp",
+      "avatar": "https://ui-avatars.com/api/?name=Daniel+Earp"
+    },
+    "content": "<p>Where is good to visit?</p>",
+    "createdAt": "Thu Dec 22 2022",
+    "_id": "igt8g8glbz9w9rr"
+  },
+  {
+    "category": "Category 1",
+    "title": "Your a wizard Harry!",
+    "cover": "http://localhost:3001/img/blog_covers/igt8g8glbz9zb2j.gif",
+    "readTime": { "value": 2, "unit": "minute" },
+    "author": {
+      "name": "Daniel Earp",
+      "avatar": "https://ui-avatars.com/api/?name=Daniel+Earp"
+    },
+    "content": "<p>fdfsfdsfdsfdsfdsf</p>",
+    "createdAt": "Thu Dec 22 2022",
+    "_id": "igt8g8glbz9zb2j"
+  },
+  {
+    "category": "Category4",
+    "title": "Who is this green guy?",
+    "cover": "http://localhost:3001/img/blog_covers/igt8g8glbza02br.gif",
+    "readTime": { "value": 2, "unit": "minute" },
+    "author": {
+      "name": "Daniel Earp",
+      "avatar": "https://ui-avatars.com/api/?name=Daniel+Earp"
+    },
+    "content": "<p>gfdgfdggfdgfdg</p>",
+    "createdAt": "Thu Dec 22 2022",
+    "_id": "igt8g8glbza02br"
+  }
+]
