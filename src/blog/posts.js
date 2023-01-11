@@ -10,7 +10,7 @@ import { v2 as cloudinary } from 'cloudinary'
 const { NotFound, BadRequest } = httpErrors
 
 const blogCoverPhoto = multer({
-  storage: new cloudinary({
+  storage: new CloudinaryStorage({
     cloudinary,
     params: {
       folder: 'StriveBlog',

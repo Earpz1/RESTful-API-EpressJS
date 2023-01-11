@@ -11,7 +11,7 @@ import { v2 as cloudinary } from 'cloudinary'
 const authorsRouter = express.Router()
 
 const avatarPhoto = multer({
-  storage: new cloudinary({
+  storage: new CloudinaryStorage({
     cloudinary,
     params: {
       folder: 'StriveBlog',
