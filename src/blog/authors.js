@@ -98,17 +98,17 @@ authorsRouter.post(
   avatarPhoto,
   async (request, response, next) => {
     try {
-      console.log(request.file.buffer)
-      const fileName = request.params.id + '.gif'
-      await saveAvatarPhoto(fileName, request.file.buffer)
+      console.log(request.file)
 
-      const url = 'http://localhost:3001/img/avatars/' + fileName
+      const url = request.file.path
 
       const authors = await getAuthors()
 
       const authorIndex = authors.findIndex(
         (author) => author.ID === request.params.id,
       )
+
+      console.log(authorIndex)
 
       if (authorIndex !== -1) {
         const author = authors[authorIndex]

@@ -2,7 +2,7 @@
   {
     "category": "Category2",
     "title": "Best places to visit in the world!",
-    "cover": "http://localhost:3001/img/blog_covers/igt8g8glbz9w9rr.gif",
+    "cover": "https://res.cloudinary.com/ddfjs3j22/image/upload/v1673474289/StriveBlog/osbpmdzvpkklm7czh06d.jpg",
     "readTime": { "value": 2, "unit": "minute" },
     "author": {
       "name": "Daniel Earp",
@@ -11,31 +11,5 @@
     "content": "<p>Where is good to visit?</p>",
     "createdAt": "Thu Dec 22 2022",
     "_id": "igt8g8glbz9w9rr"
-  },
-  {
-    "category": "Category 1",
-    "title": "Your a wizard Harry!",
-    "cover": "http://localhost:3001/img/blog_covers/igt8g8glbz9zb2j.gif",
-    "readTime": { "value": 2, "unit": "minute" },
-    "author": {
-      "name": "Daniel Earp",
-      "avatar": "https://ui-avatars.com/api/?name=Daniel+Earp"
-    },
-    "content": "<p>fdfsfdsfdsfdsfdsf</p>",
-    "createdAt": "Thu Dec 22 2022",
-    "_id": "igt8g8glbz9zb2j"
-  },
-  {
-    "category": "Category4",
-    "title": "Who is this green guy?",
-    "cover": "http://localhost:3001/img/blog_covers/igt8g8glbza02br.gif",
-    "readTime": { "value": 2, "unit": "minute" },
-    "author": {
-      "name": "Daniel Earp",
-      "avatar": "https://ui-avatars.com/api/?name=Daniel+Earp"
-    },
-    "content": "<p>gfdgfdggfdgfdg</p>",
-    "createdAt": "Thu Dec 22 2022",
-    "_id": "igt8g8glbza02br"
   }
 ]

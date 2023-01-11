@@ -7,7 +7,7 @@ import { genericError, NotFoundError } from './errors.js'
 import createHttpError from 'http-errors'
 
 const server = express()
-const port = process.env.PORT
+const port = 3001
 const publicFolder = join(process.cwd(), './public')
 
 const logger = (request, response, next) => {
@@ -15,7 +15,10 @@ const logger = (request, response, next) => {
   next()
 }
 
-const whitelist = ['https://strive-blog-5qnytcqnu-earpz1.vercel.app']
+const whitelist = [
+  'localhost:3001',
+  'https://strive-blog-5qnytcqnu-earpz1.vercel.app',
+]
 
 server.get('/', (request, response) => {
   response.send('Successful connection')

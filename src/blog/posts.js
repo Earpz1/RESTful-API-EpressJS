@@ -83,10 +83,7 @@ blogPostsRouter.post(
   blogCoverPhoto,
   async (request, response, next) => {
     try {
-      const fileName = request.params.id + '.gif'
-      await saveBlogCover(fileName, request.file.buffer)
-
-      const url = 'http://localhost:3001/img/blog_covers/' + fileName
+      const url = request.file.path
 
       const postData = await getPosts()
       const postIndex = postData.findIndex(

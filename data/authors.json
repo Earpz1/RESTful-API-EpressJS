@@ -1,1 +1,10 @@
-[{"name":"Daniel","surname":"Earp","email":"dan.earp@icloud.com","dob":"19-02-1991","avatar":"http://localhost:3001/img/avatars/igt8ajclbz5xqwo.gif","ID":"igt8ajclbz5xqwo"}]
+[
+  {
+    "name": "Daniel",
+    "surname": "Earp",
+    "email": "dan.earp@icloud.com",
+    "dob": "19-02-1991",
+    "avatar": "https://res.cloudinary.com/ddfjs3j22/image/upload/v1673474079/StriveBlog/vivefx3uaxewsikuhcou.jpg",
+    "ID": "igt8ajclbz5xqwo"
+  }
+]
