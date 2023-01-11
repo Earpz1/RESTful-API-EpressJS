@@ -5,8 +5,19 @@ import { dirname, join } from 'path'
 import uniqid from 'uniqid'
 import multer from 'multer'
 import { getAuthors, writeAuthor, saveAvatarPhoto } from '../../lib/fs-funcs.js'
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import { v2 as cloudinary } from 'cloudinary'
 
 const authorsRouter = express.Router()
+
+const avatarPhoto = multer({
+  storage: new cloudinary({
+    cloudinary,
+    params: {
+      folder: 'StriveBlog',
+    },
+  }),
+}).single('avatar')
 
 //This endpoint is for GETTING all the authors from the JSON file
 
@@ -84,7 +95,7 @@ authorsRouter.post('/:checkEmail', async (request, response) => {
 
 authorsRouter.post(
   '/:id/uploadAvatar',
-  multer().single('avatar'),
+  avatarPhoto,
   async (request, response, next) => {
     try {
       console.log(request.file.buffer)

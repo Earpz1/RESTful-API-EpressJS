@@ -4,8 +4,19 @@ import uniqid from 'uniqid'
 import httpErrors from 'http-errors'
 import { getPosts, writePosts, saveBlogCover } from '../../lib/fs-funcs.js'
 import multer from 'multer'
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import { v2 as cloudinary } from 'cloudinary'
 
 const { NotFound, BadRequest } = httpErrors
+
+const blogCoverPhoto = multer({
+  storage: new cloudinary({
+    cloudinary,
+    params: {
+      folder: 'StriveBlog',
+    },
+  }),
+}).single('cover')
 
 const blogPostsRouter = express.Router()
 
@@ -69,7 +80,7 @@ blogPostsRouter.get('/:id', async (request, response, next) => {
 //Add a blog cover photo
 blogPostsRouter.post(
   '/:id/uploadCover',
-  multer().single('cover'),
+  blogCoverPhoto,
   async (request, response, next) => {
     try {
       const fileName = request.params.id + '.gif'
