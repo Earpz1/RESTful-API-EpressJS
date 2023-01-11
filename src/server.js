@@ -15,7 +15,7 @@ const logger = (request, response, next) => {
   next()
 }
 
-const whitelist = ['https://strive-blog-l4cpa2mro-earpz1.vercel.app']
+const whitelist = ['https://strive-blog-5qnytcqnu-earpz1.vercel.app']
 
 server.get('/', (request, response) => {
   response.send('Successful connection')
