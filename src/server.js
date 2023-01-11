@@ -4,6 +4,7 @@ import blogPostsRouter from './blog/posts.js'
 import { join } from 'path'
 import cors from 'cors'
 import { genericError, NotFoundError } from './errors.js'
+import createHttpError from 'http-errors'
 
 const server = express()
 const port = 3001
