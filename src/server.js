@@ -14,14 +14,29 @@ const logger = (request, response, next) => {
   next()
 }
 
+const whitelist = [process.env.FE_PROD_URL]
+
 server.get('/', (request, response) => {
   response.send('Successful connection')
 })
 
 //Middleware
 server.use(express.static(publicFolder))
-server.use(cors())
-server.use(logger)
+
+server.use(
+  cors({
+    origin: (origin, corsNext) => {
+      console.log('Origin: ', origin)
+
+      if (!origin || whitelist.indexOf(origin) !== -1) {
+        corsNext(null, true)
+      } else {
+        corsNext(createHttpError(400, `Cors Errors!`))
+      }
+    },
+  }),
+)
+
 server.use(express.json())
 
 //Endpoints
