@@ -15,6 +15,8 @@ const logger = (request, response, next) => {
   next()
 }
 
+const whitelist = [process.env.FE_PROD_URL]
+
 server.get('/', (request, response) => {
   response.send('Successful connection')
 })
@@ -26,6 +28,8 @@ server.use(
   cors({
     origin: (origin, corsNext) => {
       console.log('Origin: ', origin)
+        corsNext(null, true)
+      }
     },
   }),
 )
