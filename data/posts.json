@@ -11,18 +11,5 @@
     "content": "<p>Where is good to visit?</p>",
     "createdAt": "Thu Dec 22 2022",
     "_id": "igt8g8glbz9w9rr"
-  },
-  {
-    "category": "Category2",
-    "title": "This is so cool!",
-    "cover": "https://res.cloudinary.com/ddfjs3j22/image/upload/v1673474289/StriveBlog/osbpmdzvpkklm7czh06d.jpg",
-    "readTime": { "value": 2, "unit": "minute" },
-    "author": {
-      "name": "Daniel Earp",
-      "avatar": "https://ui-avatars.com/api/?name=Daniel+Earp"
-    },
-    "content": "How amazing is this?!",
-    "createdAt": "Thu Dec 22 2022",
-    "_id": "fddsfdfdsfgfdg"
   }
 ]

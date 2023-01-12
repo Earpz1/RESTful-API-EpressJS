@@ -32,6 +32,7 @@ filesRouter.get('/pdf/post/:id', async (request, response, next) => {
   pipeline(source, destination, (error) => {
     if (error) console.log(error)
   })
+  response.send(200)
 })
 
 export default filesRouter
