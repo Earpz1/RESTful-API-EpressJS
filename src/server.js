@@ -1,6 +1,7 @@
 import express from 'express'
 import authorsRouter from './blog/authors.js'
 import blogPostsRouter from './blog/posts.js'
+import filesRouter from './files/index.js'
 import { join } from 'path'
 import cors from 'cors'
 import { genericError, NotFoundError } from './errors.js'
@@ -43,6 +44,7 @@ server.use(express.json())
 
 server.use('/authors', authorsRouter)
 server.use('/posts', blogPostsRouter)
+server.use('/files', filesRouter)
 
 //Error handlers
 
