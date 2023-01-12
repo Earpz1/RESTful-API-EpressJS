@@ -27,12 +27,11 @@ filesRouter.get('/pdf/post/:id', async (request, response, next) => {
   const singlePost = posts.find((post) => post._id === id)
 
   console.log(posts)
-  const source = getPDFReadableStream([singlePost])
+  const source = getPDFReadableStream(singlePost)
   const destination = response
   pipeline(source, destination, (error) => {
     if (error) console.log(error)
   })
-  response.send(200)
 })
 
 export default filesRouter
